@@ -1,0 +1,66 @@
+﻿@model GUI.Models.PRODUCTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PRODUCTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRECIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRECIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MATERIAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MATERIAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CATEGORIA1.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CATEGORIA1.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SUBCATEGORIA1.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SUBCATEGORIA1.NOMBRE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

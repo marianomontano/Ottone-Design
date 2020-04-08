@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0321b275ee3549c4a02053f6235404aa" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="OTTONEModel.CATEGORIA" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="OTTONEModel.PRODUCTO" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OTTONEModel.SUBCATEGORIA" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="OTTONEModel.FK__PRODUCTO__CATEGO__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="OTTONEModel.FK__SUBCATEGO__ID_CA__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="OTTONEModel.FK__PRODUCTO__SUBCAT__3D5E1FD2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OTTONEModel.CLIENTES" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OTTONEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="NOMBRE" Type="varchar" MaxLength="60" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar(max)" />
+          <Property Name="PRECIO" Type="real" />
+          <Property Name="MATERIAL" Type="varchar" MaxLength="20" />
+          <Property Name="CATEGORIA" Type="int" Nullable="false" />
+          <Property Name="SUBCATEGORIA" Type="int" Nullable="false" />
+          <Property Name="DIRECCION_FOTO" Type="varchar(max)" />
+          <Property Name="CODIGO_PRODUCTO" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="SUBCATEGORIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="30" />
+          <Property Name="ID_CATEGORIA" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__PRODUCTO__CATEGO__3C69FB99">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__SUBCAT__3D5E1FD2">
+          <End Role="SUBCATEGORIA" Type="Self.SUBCATEGORIA" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBCATEGORIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="SUBCATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SUBCATEGO__ID_CA__398D8EEE">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
+          <End Role="SUBCATEGORIA" Type="Self.SUBCATEGORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SUBCATEGORIA">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OTTONEModelStoreContainer">
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUBCATEGORIA" EntityType="Self.SUBCATEGORIA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__PRODUCTO__CATEGO__3C69FB99" Association="Self.FK__PRODUCTO__CATEGO__3C69FB99">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__SUBCAT__3D5E1FD2" Association="Self.FK__PRODUCTO__SUBCAT__3D5E1FD2">
+            <End Role="SUBCATEGORIA" EntitySet="SUBCATEGORIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SUBCATEGO__ID_CA__398D8EEE" Association="Self.FK__SUBCATEGO__ID_CA__398D8EEE">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="SUBCATEGORIA" EntitySet="SUBCATEGORIA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OTTONEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__CATEGO__3C69FB99" FromRole="CATEGORIA" ToRole="PRODUCTO" />
+          <NavigationProperty Name="SUBCATEGORIA" Relationship="Self.FK__SUBCATEGO__ID_CA__398D8EEE" FromRole="CATEGORIA" ToRole="SUBCATEGORIA" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PRECIO" Type="Single" />
+          <Property Name="MATERIAL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CATEGORIA" Type="Int32" Nullable="false" />
+          <Property Name="SUBCATEGORIA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CATEGORIA1" Relationship="Self.FK__PRODUCTO__CATEGO__3C69FB99" FromRole="PRODUCTO" ToRole="CATEGORIA" />
+          <NavigationProperty Name="SUBCATEGORIA1" Relationship="Self.FK__PRODUCTO__SUBCAT__3D5E1FD2" FromRole="PRODUCTO" ToRole="SUBCATEGORIA" />
+          <Property Name="DIRECCION_FOTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CODIGO_PRODUCTO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SUBCATEGORIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ID_CATEGORIA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CATEGORIA" Relationship="Self.FK__SUBCATEGO__ID_CA__398D8EEE" FromRole="SUBCATEGORIA" ToRole="CATEGORIA" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__SUBCAT__3D5E1FD2" FromRole="SUBCATEGORIA" ToRole="PRODUCTO" />
+        </EntityType>
+        <Association Name="FK__PRODUCTO__CATEGO__3C69FB99">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SUBCATEGO__ID_CA__398D8EEE">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
+          <End Role="SUBCATEGORIA" Type="Self.SUBCATEGORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SUBCATEGORIA">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__SUBCAT__3D5E1FD2">
+          <End Role="SUBCATEGORIA" Type="Self.SUBCATEGORIA" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBCATEGORIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="SUBCATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OTTONEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="SUBCATEGORIA" EntityType="Self.SUBCATEGORIA" />
+          <AssociationSet Name="FK__PRODUCTO__CATEGO__3C69FB99" Association="Self.FK__PRODUCTO__CATEGO__3C69FB99">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SUBCATEGO__ID_CA__398D8EEE" Association="Self.FK__SUBCATEGO__ID_CA__398D8EEE">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="SUBCATEGORIA" EntitySet="SUBCATEGORIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__SUBCAT__3D5E1FD2" Association="Self.FK__PRODUCTO__SUBCAT__3D5E1FD2">
+            <End Role="SUBCATEGORIA" EntitySet="SUBCATEGORIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <EntitySet Name="CLIENTES" EntityType="OTTONEModel.CLIENTES" />
+        </EntityContainer>
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="NOMBRE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OTTONEModelStoreContainer" CdmEntityContainer="OTTONEEntities">
+          <EntitySetMapping Name="CATEGORIA">
+            <EntityTypeMapping TypeName="OTTONEModel.CATEGORIA">
+              <MappingFragment StoreEntitySet="CATEGORIA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO">
+            <EntityTypeMapping TypeName="OTTONEModel.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="CODIGO_PRODUCTO" ColumnName="CODIGO_PRODUCTO" />
+                <ScalarProperty Name="DIRECCION_FOTO" ColumnName="DIRECCION_FOTO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="MATERIAL" ColumnName="MATERIAL" />
+                <ScalarProperty Name="CATEGORIA" ColumnName="CATEGORIA" />
+                <ScalarProperty Name="SUBCATEGORIA" ColumnName="SUBCATEGORIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUBCATEGORIA">
+            <EntityTypeMapping TypeName="OTTONEModel.SUBCATEGORIA">
+              <MappingFragment StoreEntitySet="SUBCATEGORIA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTES">
+            <EntityTypeMapping TypeName="OTTONEModel.CLIENTES">
+              <MappingFragment StoreEntitySet="CLIENTES">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
