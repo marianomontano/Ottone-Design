@@ -7,7 +7,7 @@
 <h2>Listado de Productos</h2>
 
 <p>
-    @Html.ActionLink("Ingresar Nuevo Producto", "Create")
+    <a href="/productos/create" class="btn btn-primary">Crear Nuevo Producto</a>
 </p>
 <table class="table table-responsive">
     <thead class="">
@@ -26,15 +26,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PRECIO)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MATERIAL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CATEGORIA1.NOMBRE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SUBCATEGORIA1.NOMBRE)
             </th>
             <th></th>
         </tr>
@@ -59,18 +50,9 @@
                 @Html.DisplayFor(modelItem => item.PRECIO)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MATERIAL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CATEGORIA1.NOMBRE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SUBCATEGORIA1.NOMBRE)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Detalles", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
+                <a href="/productos/edit/@item.ID" class="btn btn-warning">Editar</a> |
+                <a href="/productos/details/@item.ID" class="btn btn-info">Detalles</a> |
+                <a href="/productos/delete/@item.ID" class="btn btn-danger">Eliminar</a>
             </td>
         </tr>
     </tbody>

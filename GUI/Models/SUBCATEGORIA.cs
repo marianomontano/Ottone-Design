@@ -11,7 +11,8 @@ namespace GUI.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SUBCATEGORIA
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,9 +20,12 @@ namespace GUI.Models
         {
             this.PRODUCTO = new HashSet<PRODUCTO>();
         }
-    
+
         public int ID { get; set; }
+
+        [Display(Name = "Nombre")]
         public string NOMBRE { get; set; }
+        [Display(Name = "Categoría")]
         public int ID_CATEGORIA { get; set; }
     
         public virtual CATEGORIA CATEGORIA { get; set; }

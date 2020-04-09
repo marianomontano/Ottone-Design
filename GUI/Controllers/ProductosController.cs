@@ -14,6 +14,7 @@ namespace GUI.Controllers
     {
         private OTTONEEntities db = new OTTONEEntities();
 
+        #region Get Methods
         // GET: Productoss
         public ActionResult Index()
         {
@@ -44,6 +45,42 @@ namespace GUI.Controllers
             return View();
         }
 
+        // GET: Productoss/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PRODUCTO producto = db.PRODUCTO.Find(id);
+            if (producto == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CATEGORIA = new SelectList(db.CATEGORIA, "ID", "NOMBRE", producto.CATEGORIA);
+            ViewBag.SUBCATEGORIA = new SelectList(db.SUBCATEGORIA, "ID", "NOMBRE", producto.SUBCATEGORIA);
+            return View(producto);
+        }
+
+        // GET: Productoss/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PRODUCTO producto = db.PRODUCTO.Find(id);
+            if (producto == null)
+            {
+                return HttpNotFound();
+            }
+            return View(producto);
+        }
+
+        #endregion
+
+        #region Post Methods
+
         // POST: Productoss/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -60,23 +97,6 @@ namespace GUI.Controllers
 
             ViewBag.CATEGORIA = new SelectList(db.CATEGORIA, "ID", "NOMBRE", producto.CATEGORIA);
 
-            ViewBag.SUBCATEGORIA = new SelectList(db.SUBCATEGORIA, "ID", "NOMBRE", producto.SUBCATEGORIA);
-            return View(producto);
-        }
-
-        // GET: Productoss/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PRODUCTO producto = db.PRODUCTO.Find(id);
-            if (producto == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CATEGORIA = new SelectList(db.CATEGORIA, "ID", "NOMBRE", producto.CATEGORIA);
             ViewBag.SUBCATEGORIA = new SelectList(db.SUBCATEGORIA, "ID", "NOMBRE", producto.SUBCATEGORIA);
             return View(producto);
         }
@@ -99,21 +119,6 @@ namespace GUI.Controllers
             return View(producto);
         }
 
-        // GET: Productoss/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PRODUCTO producto = db.PRODUCTO.Find(id);
-            if (producto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(producto);
-        }
-
         // POST: Productoss/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -124,6 +129,8 @@ namespace GUI.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

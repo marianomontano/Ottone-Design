@@ -1,0 +1,40 @@
+﻿@model GUI.Models.SUBCATEGORIA
+
+@{
+    ViewBag.Title = "Eliminar subcategoría";
+}
+
+<h2>Eliminar Subcategoría</h2>
+
+<h3>Seguro que desea eliminar esta subcategoría?</h3>
+<div>
+    <h4>SUBCATEGORIA</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CATEGORIA.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CATEGORIA.NOMBRE)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            <a href="/subcategorias/index" class="btn btn-primary">Regresar al listado</a>
+        </div>
+    }
+</div>

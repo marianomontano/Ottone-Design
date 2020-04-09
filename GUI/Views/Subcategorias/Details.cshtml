@@ -1,0 +1,35 @@
+﻿@model GUI.Models.SUBCATEGORIA
+
+@{
+    ViewBag.Title = "Detalles de subcategoría";
+}
+
+<h2>Detalles de Subcategoría</h2>
+
+<div>
+    <h4>SUBCATEGORIA</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CATEGORIA.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CATEGORIA.NOMBRE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="/subcategorias/edit/@Model.ID" class="btn btn-success">Editar</a>
+    @*@Html.ActionLink("Editar", "Edit", new { id = Model.ID })*@ |
+    <a href="/subcategorias/index" class="btn btn-primary">Regresar al listado</a>
+</p>

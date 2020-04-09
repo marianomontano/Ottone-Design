@@ -1,0 +1,39 @@
+﻿@model IEnumerable<GUI.Models.SUBCATEGORIA>
+
+@{
+    ViewBag.Title = "Índice de subcategorías";
+}
+
+<h2>Listado de Subcategorías</h2>
+
+<p>
+    <a href="/subcategorias/create" class="btn btn-primary"> Crear nueva</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CATEGORIA.NOMBRE)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CATEGORIA.NOMBRE)
+        </td>
+        <td>
+            <a href="/subcategorias/edit/@item.ID" class="btn btn-warning">Editar</a> |
+            <a href="/subcategorias/details/@item.ID" class="btn btn-info">Detalles</a> |
+            <a href="/subcategorias/delete/@item.ID" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+}
+
+</table>
