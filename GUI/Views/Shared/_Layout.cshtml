@@ -11,6 +11,7 @@
 
 </head>
 <body>
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -26,16 +27,22 @@
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                     <li>@Html.ActionLink("Acerca de nosotros", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Productos", "Index", "Productos")</li>
+                    <li>@Html.ActionLink("Subcategorías", "Index", "Subcategorias")</li>
+                    <li>@Html.ActionLink("Categorías", "Index", "Categorias")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+
     <div class="container body-content">
+
         @RenderBody()
-        <hr />
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - Aplicación creada por 
+            <p>
+                &copy; @DateTime.Now.Year - Aplicación creada por
                 <a href="https://www.linkedin.com/in/mariano-montano-93a83297/" target="_blank">
                     Mariano Montano
                 </a>
@@ -45,6 +52,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
-</html>
+    @RenderSection("scripts", required: false)  
+</body >
+</html >

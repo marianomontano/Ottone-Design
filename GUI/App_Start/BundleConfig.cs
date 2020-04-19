@@ -24,8 +24,9 @@ namespace GUI
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/default.css",
-                      "~/Content/fonts.css",
+                      "~/Content/bootstrap-grid.css",
+                      //"~/Content/default.css",
+                      //"~/Content/fonts.css",
                       "~/Content/site.css"));
         }
     }

@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<GUI.Models.PRODUCTO>
 
+
 @{
     ViewBag.Title = "Índice";
 }
@@ -8,6 +9,19 @@
 
 <p>
     <a href="/productos/create" class="btn btn-primary">Crear Nuevo Producto</a>
+    @using (Html.BeginForm("Index", "Productos", FormMethod.Get))
+    {
+        <p>
+            @*  
+                al string del dropdownlist le paso el nombre del viewbag 
+                y debe coincidir con el nombre del parámetro
+            *@
+            Categoría: @Html.DropDownList("_categoria", "Todas")
+            Subcategoría: @Html.DropDownList("_subcategoria", "Todas")
+            Nombre: @Html.TextBox("_nombre")
+            <input type="submit" value="Filtrar" class="btn btn-default" />
+        </p>
+    }
 </p>
 <table class="table table-responsive">
     <thead class="">
@@ -31,31 +45,32 @@
         </tr>
     </thead>
 
-@foreach (var item in Model) {
-    <tbody>
-        <tr>
-            <td>
-                <img class="img-responsive" src="@item.DIRECCION_FOTO" alt="@item.NOMBRE" height="50" width="50" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CODIGO_PRODUCTO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NOMBRE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DESCRIPCION)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PRECIO)
-            </td>
-            <td>
-                <a href="/productos/edit/@item.ID" class="btn btn-warning">Editar</a> |
-                <a href="/productos/details/@item.ID" class="btn btn-info">Detalles</a> |
-                <a href="/productos/delete/@item.ID" class="btn btn-danger">Eliminar</a>
-            </td>
-        </tr>
-    </tbody>
-}
+    @foreach (var item in Model)
+    {
+        <tbody>
+            <tr>
+                <td>
+                    <img class="img-responsive" src="@item.DIRECCION_FOTO" alt="@item.NOMBRE" height="50" width="50" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CODIGO_PRODUCTO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DESCRIPCION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PRECIO)
+                </td>
+                <td>
+                    <a href="/productos/edit/@item.ID" class="btn btn-warning">Editar</a> |
+                    <a href="/productos/details/@item.ID" class="btn btn-info">Detalles</a> |
+                    <a href="/productos/delete/@item.ID" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    }
 
 </table>

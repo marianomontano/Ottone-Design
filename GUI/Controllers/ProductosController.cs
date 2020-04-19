@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,11 +16,59 @@ namespace GUI.Controllers
         private OTTONEEntities db = new OTTONEEntities();
 
         #region Get Methods
-        // GET: Productoss
-        public ActionResult Index()
+        ////GET: Productoss
+        //public ActionResult Index()
+        //{
+        //    var productos = db.PRODUCTO.Include(p => p.CATEGORIA1).Include(p => p.SUBCATEGORIA1);
+
+        //    return View(productos);
+
+        //}
+
+        //GET: Productos Filtrados
+        public ActionResult Index(string _nombre, string _categoria, string _subcategoria)
         {
-            var producto = db.PRODUCTO.Include(p => p.CATEGORIA1).Include(p => p.SUBCATEGORIA1);
-            return View(producto.ToList());
+            var productos = db.PRODUCTO.Include(p => p.CATEGORIA1).Include(p => p.SUBCATEGORIA1);
+
+            //cargo el selector de categorias
+            var cat = from c in db.CATEGORIA
+                      orderby c.NOMBRE
+                      select c.NOMBRE;
+            var listaCategorias = new List<string>();
+            listaCategorias.AddRange(cat.Distinct());
+            ViewBag._categoria = new SelectList(listaCategorias);
+
+            //cargo el selector de subcategorias
+            var subcat = from s in db.SUBCATEGORIA
+                         join c in db.CATEGORIA on s.ID_CATEGORIA equals c.ID
+                         where c.NOMBRE == _categoria
+                         orderby s.NOMBRE
+                         select s.NOMBRE;
+            var listaSubcategorias = new List<string>();
+            listaSubcategorias.AddRange(subcat.Distinct());
+            ViewBag._subcategoria = new SelectList(listaSubcategorias);
+            
+
+            //filtro por nombre
+            if(!String.IsNullOrEmpty(_nombre))
+            {
+                productos = productos.Where(p => p.NOMBRE.Contains(_nombre));
+            }
+
+            //filtro por categoria
+            if (!String.IsNullOrEmpty(_categoria))
+            {
+                productos = productos.Where(p => p.CATEGORIA1 == db.CATEGORIA.FirstOrDefault(x => x.NOMBRE == _categoria));
+
+            }
+
+            //filtro por subcategoria
+            if (!String.IsNullOrEmpty(_subcategoria))
+            {
+                productos = productos.Where(p => p.SUBCATEGORIA1 == db.SUBCATEGORIA.FirstOrDefault(x => x.NOMBRE == _subcategoria));
+            }
+
+            return View(productos);
         }
 
         // GET: Productoss/Details/5
@@ -40,6 +89,7 @@ namespace GUI.Controllers
         // GET: Productoss/Create
         public ActionResult Create()
         {
+
             ViewBag.CATEGORIA = new SelectList(db.CATEGORIA, "ID", "NOMBRE");
             ViewBag.SUBCATEGORIA = new SelectList(db.SUBCATEGORIA, "ID", "NOMBRE");
             return View();
